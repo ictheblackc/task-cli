@@ -6,8 +6,24 @@ from datetime import datetime
 FILE_NAME = 'tasks.json'
 
 
-def add_task(task):
-    pass
+def add_task(description):
+    tasks = load_tasks()
+    
+    ids = [t['id'] for t in tasks]
+    id = max(ids) + 1 if ids else 1
+
+    now = datetime.now().isoformat()
+
+    task = {
+        'id': id,
+        'description': description,
+        'status': 'todo',
+        'createdAt': now,
+        'updatedAt': now,
+    }
+    tasks.append(task)
+    save_tasks(tasks)
+    print(f"New task with ID {id} was successfully added")
 
 
 def get_task(task):
@@ -52,7 +68,8 @@ def main():
     
     match cmd:
         case 'add':
-            pass
+            description = " ".join(args[1:])
+            add_task(description)
         case 'update':
             pass
         case 'delete':
