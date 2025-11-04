@@ -25,10 +25,6 @@ def add_task(description):
     print(f"Task #{id} has been added.")
 
 
-def get_task(task):
-    pass
-
-
 def update_task(id, description):
     tasks = load_tasks()
 
@@ -88,6 +84,17 @@ def save_tasks(tasks):
         json.dump(tasks, f)
 
 
+def show_tasks():
+    tasks = load_tasks()
+
+    if not tasks:
+        print("No tasks yet.")
+        return
+
+    for t in tasks:
+        print(f"#{t['id']} [{t['status']}] {t['description']}")
+
+
 def main():
     args = sys.argv[1:]
 
@@ -114,7 +121,7 @@ def main():
             id = args[1]
             change_status(id, 'done')
         case 'list':
-            pass
+            show_tasks()
         case _:
             print(f"Unknown command: {cmd}")
 
