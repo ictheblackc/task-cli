@@ -12,26 +12,36 @@ def add_task(description):
     ids = [t['id'] for t in tasks]
     id = max(ids) + 1 if ids else 1
 
-    now = datetime.now().isoformat()
-
     task = {
         'id': id,
         'description': description,
         'status': 'todo',
-        'createdAt': now,
-        'updatedAt': now,
+        'createdAt': datetime.now().isoformat(),
+        'updatedAt': datetime.now().isoformat(),
     }
     tasks.append(task)
+
     save_tasks(tasks)
-    print(f"New task with ID {id} was successfully added")
+    print(f"Task #{id} has been added.")
 
 
 def get_task(task):
     pass
 
 
-def update_task(task):
-    pass
+def update_task(id, description):
+    tasks = load_tasks()
+
+    for t in tasks:
+        if t['id'] == int(id):
+            t['description'] = description
+            t['updatedAt'] = datetime.now().isoformat()
+    
+            save_tasks(tasks)
+            print(f"Task #{id} has been updated.")
+            return
+    
+    print(f"Task #{id} not found.")
 
 
 def delete_task(task):
@@ -71,7 +81,9 @@ def main():
             description = " ".join(args[1:])
             add_task(description)
         case 'update':
-            pass
+            id = args[1]
+            description = " ".join(args[2:])
+            update_task(id, description)
         case 'delete':
             pass
         case 'mark-in-progress':
