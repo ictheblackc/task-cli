@@ -44,8 +44,18 @@ def update_task(id, description):
     print(f"Task #{id} not found.")
 
 
-def delete_task(task):
-    pass
+def delete_task(id):
+    tasks = load_tasks()
+
+    for t in tasks:
+        if t['id'] == int(id):
+            tasks.remove(t)
+
+            save_tasks(tasks)
+            print(f"Task #{id} has been deleted.")
+            return
+    
+    print(f"Task #{id} not found.")
 
 
 def change_status(id):
@@ -85,7 +95,8 @@ def main():
             description = " ".join(args[2:])
             update_task(id, description)
         case 'delete':
-            pass
+            id = args[1]
+            delete_task(id)
         case 'mark-in-progress':
             pass
         case 'mark-done':
