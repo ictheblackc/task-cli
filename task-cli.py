@@ -84,8 +84,11 @@ def save_tasks(tasks):
         json.dump(tasks, f)
 
 
-def show_tasks():
+def show_tasks(status=None):
     tasks = load_tasks()
+
+    if status:
+        tasks = [t for t in tasks if t['status'] == status]
 
     if not tasks:
         print("No tasks yet.")
@@ -121,7 +124,8 @@ def main():
             id = args[1]
             change_status(id, 'done')
         case 'list':
-            show_tasks()
+            status = args[1] if len(args) > 1 else None
+            show_tasks(status)
         case _:
             print(f"Unknown command: {cmd}")
 
