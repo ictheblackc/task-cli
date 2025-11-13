@@ -9,7 +9,7 @@ It allows you to **add, update, delete, and track tasks** with different statuse
 
 All tasks are stored in a local JSON file (`tasks.json`) in the current directory.
 
-> **Note:** This project was created as a solution for the **Task Tracker** exercise from [roadmap.sh](https://roadmap.sh) to help beginners practice building a CLI app. Some details have been simplified. However, the code can still be used as an example.
+> **Note:** This project was created as a solution for the [Task Tracker](https://roadmap.sh/projects/task-tracker) exercise from [roadmap.sh](https://roadmap.sh) to help beginners practice building a CLI app. Some details have been simplified. However, the code can still be used as an example.
 
 ## Installation
 
